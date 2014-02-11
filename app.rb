@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# See 
+# See
 #   http://kingyo-bachi.blogspot.jp/2012/02/sinatra.html
 #   http://yusukezzz.net/blog/archives/1388
 
@@ -19,7 +19,7 @@ get '/' do
 end
 get '/upload' do
   redirect '/'
-end 
+end
 
 # アップロードされたファイルを保存する。
 put '/upload' do
@@ -29,7 +29,7 @@ put '/upload' do
     # puts params
     new_filename = "#{params[:file][:filename]}"
     save_file = "./public/files/#{new_filename}"
-    File.open(save_file, 'wb'){ |f| f.write(params[:file][:tempfile].read) }
+    File.open(save_file, 'wb') { |f| f.write(params[:file][:tempfile].read) }
     @mes = "アップロードしました： #{new_filename}"
   end
   haml :index
@@ -56,6 +56,8 @@ __END__
           - f_ary.each do |f|
             - cnt += 1
             %tr
-            %td{:align => 'right'}= cnt 
+            %td{:align => 'right'}= cnt
             %td
               %a{:href =>"#{f[9..-1]}"}= h f[14..-1]
+
+      %div{:style =>'padding-top: 20px;'}= "(c) 2014 katoy"

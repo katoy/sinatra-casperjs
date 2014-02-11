@@ -1,0 +1,40 @@
+# coding: utf-8
+
+# require 'bundler/gem_tasks'
+
+require 'logger'
+
+Log = Logger.new(STDOUT)
+
+task :default => :spec
+
+# yardsettings
+require 'yard'
+require 'yard/rake/yardoc_task'
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['src/**/*.rb', '-', 'Design.md']
+  t.options = []
+  t.options << '--debug' << '--verbose' if $trace
+end
+
+# clear
+desc 'Delete working files'
+task :clean do
+  Dir.glob('**/*~').each { |f| FileUtils.rm f }
+end
+
+# spec
+desc 'run spec'
+task do
+
+end
+
+desc 'metrics'
+task :metrics do
+  system 'metric_fu'
+end
+
+desc 'checkstyle using rubocop.'
+task :checkstyle do
+  system 'rubocop src/*.rb'
+end
